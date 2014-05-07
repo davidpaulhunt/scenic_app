@@ -1,0 +1,12 @@
+.container-full
+  .row
+    .col-lg-12.text-center.v-center
+      %h1 Welcome to Scenic
+      %p.lead A simple, personal photo hosting tool made for you.
+      %br/
+      %br/
+      %br/
+      %form.col-lg-12
+        .input-group{style: "width:340px;text-align:center;margin:0 auto;"}
+          = link_to "Login", new_session_path, :class => "btn btn-block btn-primary"
+          = link_to "Sign Up", new_user_path, :class => "btn btn-block btn-primary"

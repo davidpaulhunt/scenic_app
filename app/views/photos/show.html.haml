@@ -1,0 +1,45 @@
+.container
+  .row
+    .col-md-8
+      = link_to "Back", collection_path(@photo.collections.first), :class => "btn btn-primary"
+      = link_to "Delete Photo", photo_path, method: :delete, :class => "btn btn-danger", :data => { confirm: "Are you sure? This is FOREVER" }
+    Tags:
+    - @photo.tags.each do |tag|
+      - unless !tag.persisted?
+        = tag.name
+    = form_for @new_tag, url: tags_path, method: :post do |f|
+      = f.hidden_field :taggable_id, value: @photo.id
+      = f.hidden_field :taggable_type, value: "Photo"
+      .col-md-2
+        = f.text_field :name, id: "tags", :class => "ui-autocomplete-input", data: {autocomplete_source: Tag.all_tags}, :class => "form-control"
+      = f.submit "Add Tag", :class => "btn btn-info"
+%br
+.row
+  .col-md-2
+  .col-md-8
+    .well
+      = image_tag @photo.photo_upload.url, style: "width:100%;max-height:600px;"
+  .col-md-2
+
+%br
+.row
+  .col-md-2
+  .col-md-8
+    Comments
+    %table.table
+      - @photo.comments.each do |comment|
+        - if comment.created_at.nil?
+          %tr
+            %td
+              %p= comment.content
+        - else
+          %tr
+            %td
+              %p= comment.content
+              %p= time_since(comment)
+    = form_for @new_comment, url: comments_path, method: :post do |f|
+      = f.hidden_field :photo_id, value: @photo.id
+      .col-md-4
+        = f.text_area :content, :class => "form-control"
+      = f.submit "Leave Comment", :class => "btn btn-info"
+  .col-md-2

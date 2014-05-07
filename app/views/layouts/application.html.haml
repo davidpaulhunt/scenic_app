@@ -1,0 +1,33 @@
+!!!
+%html
+  %head
+    %title ScenicApp
+    = favicon_link_tag
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    .navbar.navbar-inverse.navbar-fixed-top
+      .navbar-header
+        %button.navbar-toggle{"data-target" => ".navbar-responsive-collapse", "data-toggle" => "collapse", type: "button"}
+          %span.icon-bar
+          %span.icon-bar
+          %span.icon-bar
+      = link_to "Scenic", home_path, :class => "navbar-brand"
+      - unless !current_user
+        .navbar-collapse.collapse.navbar-responsive-collapse
+          %ul.nav.navbar-nav
+            %li= link_to "Home", home_path
+          %ul.nav.navbar-nav.navbar-right
+            %li.dropdown
+              %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
+                Settings
+                %b.caret
+              %ul.dropdown-menu
+                %li= link_to "Edit Account", edit_user_path(current_user)
+                %li.divider
+                %li= link_to "Logout", logout_path, :data => { confirm: "Logout?" }
+    %br
+    %br
+    %br
+      = yield

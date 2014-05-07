@@ -1,0 +1,25 @@
+= form_for @collection, :html => {:multipart => true} do |f|
+  .form-horizontal
+    .fieldset
+      .form-group
+        .col-lg-10
+          .form-group
+            = f.label :name, :class => 'col-lg-2 control-label'
+            .col-lg-10
+              = f.text_field :name, :class => 'form-control'
+          .form-group
+            = f.label :description, :class => 'col-lg-2 control-label'
+            .col-lg-10
+              = f.text_area :description, :class => 'form-control'
+          %legend Then Add Photos
+          .form-group
+            %div.col-lg-2
+            .col-lg-10
+              = file_field_tag "photos[]", type: :file, multiple: true, class: 'form-control'
+          .actions
+            .form-group
+              %br
+              %div.col-lg-2
+              .col-lg-10
+                = f.submit "Upload", :class => "btn btn-lg btn-default"
+                = link_to "Cancel", home_path, :class => "btn btn-lg btn-primary"

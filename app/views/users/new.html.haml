@@ -1,0 +1,41 @@
+%legend Get Scenic
+
+= form_for @user, url: users_path, method: :post do |f|
+  .form-horizontal
+    .fieldset
+      .form-group
+        .col-lg-10
+          .form-group
+            = f.label :first_name, :class => "col-lg-2 control-label"
+            .col-lg-10
+              = f.text_field :first_name, :class => "form-control"
+          .form-group
+            = f.label :last_name, :class => "col-lg-2 control-label"
+            .col-lg-10
+              = f.text_field :last_name, :class => "form-control"
+          .form-group
+            = f.label :email, :class => "col-lg-2 control-label"
+            .col-lg-10
+              = f.email_field :email, :class => "form-control"
+          .form-group
+            = f.label :password, :class => "col-lg-2 control-label"
+            .col-lg-10
+              = f.password_field :password, :class => "form-control"
+          .form-group
+            = f.label :password_confirmation, :class => "col-lg-2 control-label"
+            .col-lg-10
+              = f.password_field :password_confirmation, :class => "form-control"
+          .form-group
+            %div.col-lg-2
+            .col-lg-10
+              = f.label "Terms & Conditions"
+              .well
+                You agree to not post explicit photographs or create offensive tags using this service.
+                .row.navbar-right
+                  = f.check_box :terms
+                  %b Accept
+          .actions
+            .form-group
+              .col-lg-10.col-lg-offset-2
+                = f.submit "Sign Up", :class => "btn btn-success"
+                = link_to "Cancel", new_session_path, :class => "btn btn-primary"

@@ -1,0 +1,24 @@
+.container-full
+  .row
+    .col-lg-12.text-center.v-center
+      %h1 Welcome to Scenic
+      %p.lead A simple, personal photo hosting tool made for <b>you</b>.
+      %br/
+      %br/
+      %br/
+      .col-lg-12.center-block
+        .form-group{style: "width:340px;text-align:center;margin:0 auto;"}
+          = form_tag sessions_path do
+            .form-group
+              = label_tag :email, nil, class: "control-label"
+              = text_field_tag :email, params[:email], :class => "form-control input-lg"
+            .form-group
+              = label_tag :password, nil, class: "control-label"
+              = password_field_tag :password, nil, class: "form-control input-lg"
+            %br
+            %br
+            .actions
+              .form-group
+                = submit_tag "Login", :class => "btn btn-primary btn-lg btn-block"
+                %span.pull-right
+                  %a= link_to "Register", new_user_path

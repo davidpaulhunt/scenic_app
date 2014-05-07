@@ -1,0 +1,21 @@
+.container
+  %legend= @collection.name
+  .row
+    .col-md-8
+      = link_to "Add Photos", edit_collection_path(@collection), :class => "btn btn-success"
+      = link_to "Delete Collection", collection_path, method: :delete, :class => "btn btn-danger", :data => { confirm: "Are you sure? This is FOREVER" }
+    Tags:
+    - @collection.tags.each do |tag|
+      - unless !tag.persisted?
+        = tag.name
+    = form_for @new_tag, url: tags_path, method: :post do |f|
+      = f.hidden_field :taggable_id, value: @collection.id
+      = f.hidden_field :taggable_type, value: "Collection"
+      .col-md-2
+        = f.text_field :name, id: "tags", :class => "ui-autocomplete-input", data: {autocomplete_source: Tag.all_tags}, :class => "form-control"
+      = f.submit "Add Tag", :class => "btn btn-info"
+%br
+- @collection.photos.each do |photo|
+  .col-sm-6.col-md-4
+    .thumbnail
+      = link_to image_tag(photo.photo_upload.url, :style => "width:100%;height:250px;"), photo

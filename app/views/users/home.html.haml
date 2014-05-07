@@ -1,0 +1,13 @@
+%br
+.col-md-1
+  = link_to "Add Photos", new_collection_path, :class => "btn btn-success"
+.container
+  - current_user.collections.each do |collection|
+    - unless !collection.persisted?
+      .col-sm-6.col-md-4
+        .thumbnail
+          = link_to image_tag(collection.photos.first.photo_upload.url, :style => "width:100%;height:250px;"), collection
+          %h3= collection.name
+          %p= collection.description
+          %p
+            = link_to "View", collection, :class => "btn btn-default"
