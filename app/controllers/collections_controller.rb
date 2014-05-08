@@ -26,6 +26,8 @@ class CollectionsController < ApplicationController
     @taggable = @collection
     @tags = @taggable.tags
     @new_tag = @taggable.tags.build
+    @commentable = @collection
+    @new_comment = @commentable.comments.build
   end
 
   def edit

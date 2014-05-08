@@ -1,5 +1,6 @@
 class Tag < ActiveRecord::Base
-  belongs_to :taggable, polymorphic: true
+  has_and_belongs_to_many :collections
+  has_and_belongs_to_many :photos
 
 
   def self.all_tags

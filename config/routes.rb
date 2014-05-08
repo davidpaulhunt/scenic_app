@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  get 'login' => 'sessions#new'
+  get 'login' => 'sessions#new' unless @current_user
   get 'logout' => 'sessions#destroy'
   
   resources :users do

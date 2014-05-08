@@ -11,9 +11,9 @@ class TagsController < ApplicationController
     
   def create
     @taggable = load_taggable
-    name = name_check
+    name = params[:tag][:name]
     @tag = Tag.where(name: name).first_or_create
-    @taggable.tags << @tag
+    @taggable.tags << @tag unless @taggable.tags.exists?(@tag)
     redirect_to @taggable
   end
 
@@ -28,10 +28,5 @@ class TagsController < ApplicationController
     resource = params[:tag][:taggable_type].constantize
     resource.find(id)
   end
-
-  def name_check
-    name = params[:tag].fetch('name')
-  end
-
   
 end

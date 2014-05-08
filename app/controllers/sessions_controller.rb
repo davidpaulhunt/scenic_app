@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   skip_filter :ensure_logged_in, only: [:new, :create, :destroy]
+  before_filter :path_boundary, only: [:new, :create, :destroy]
   
   def new
   end
@@ -19,6 +20,12 @@ class SessionsController < ApplicationController
   def destroy
     session[:user_id] = nil
     redirect_to login_path, notice: "You've logged out!"
+  end
+
+  def path_boundary
+    if current_user
+      redirect_to home_path
+    end
   end
 
 end
