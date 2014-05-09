@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe UsersController do
+  let(:user) { FactoryGirl.create(:user) }
 
   describe 'GET #new' do
     it 'assigns @user with a new user' do
@@ -74,18 +75,41 @@ describe UsersController do
 
   describe 'GET #edit' do
     it 'assigns @user' do
-      user = FactoryGirl.create(:user)
       login(user)
-      # debugger
       get :edit, id: user
       assigns(:user).should_not eq(nil)
     end
     it 'should render the edit page' do
-      user = FactoryGirl.create(:user)
       login(user)
       get :edit, id: user
       response.should render_template :edit
     end
   end
 
+  describe 'PUT #update' do
+    it 'assigns @user as current_user' do
+      login(user)
+      get :edit, id: user
+      assigns(:user).should_not eq(nil)
+    end
+    it 'updates the current_user' do
+      login(user)
+      get :edit, id: user
+      put :update, id: user, user: FactoryGirl.attributes_for(:update_user)
+      User.last.email.should eq("updated@email.com")
+    end
+    it 'redirects to home path' do
+      login(user)
+      put :update, id: user, user: FactoryGirl.attributes_for(:update_user)
+      response.should redirect_to home_path
+    end
+  end
+
+  describe 'DELETE #destroy' do
+    it 'destroys current user' do
+      login(user)
+      delete :destroy, id: user
+      User.last.should eq(nil)
+    end
+  end
 end
