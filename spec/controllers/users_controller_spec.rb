@@ -111,5 +111,10 @@ describe UsersController do
       delete :destroy, id: user
       User.last.should eq(nil)
     end
+    it 'should redirect to logout_path' do
+      login(user)
+      delete :destroy, id: user
+      response.should redirect_to logout_path
+    end
   end
 end
