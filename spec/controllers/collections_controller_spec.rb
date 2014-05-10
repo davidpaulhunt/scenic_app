@@ -3,15 +3,18 @@ require 'spec_helper'
 describe CollectionsController do
 
   let(:user) { FactoryGirl.create(:user) }
+  let(:collection) { user.collections.build }
 
   describe 'GET #new' do
 
     it 'assigns @collection with a new collection' do
+      login(user)
       get :new
       assigns(:collection).should_not eq(nil)
     end
 
     it 'renders the new page' do
+      login(user)
       get :new
       response.should render_template :new
     end
@@ -20,12 +23,14 @@ describe CollectionsController do
   describe 'POST #create' do
     context 'vaild collection attributes' do
       it 'creates a collection' do
+        login(user)
         collection_attrs = FactoryGirl.attributes_for(:collection)
         expect{
           post :create, collection: FactoryGirl.attributes_for(:collection)
         }.to change(Collection, :count).by(1)
       end
       it 'redirects to collections path' do
+        login(user)
         post :create, collection: FactoryGirl.attributes_for(:collection)
         response.should redirect_to home_path
       end
@@ -48,7 +53,7 @@ describe CollectionsController do
     it 'assigns @tags' do
       login(user)
       get :show, id: user.collections.first
-      assigns(:tag).should_not eq(nil)
+      assigns(:new_tag).should_not eq(nil)
     end
 
     it 'assigns @new_tag' do
@@ -84,4 +89,5 @@ describe CollectionsController do
       response.should render_template :edit
     end
   end
+
 end
