@@ -2,14 +2,23 @@ require 'spec_helper'
 
 describe Photo do
 
+  let(:photo) { FactoryGirl.create(:photo) }
+
   it 'should exist' do
-    p = Photo.new
-    p.should_not eq(nil)
+    photo.save!
+    photo.should_not eq(nil)
   end
-  
-  it 'should be invalid without photo_upload' do
-    p = Photo.new
-    p.should_not be_valid
+
+  it 'should belong to a collection' do
+    photo.save!
+    c = photo.collections.build
+    photo.collections.first.should_not eq(nil)
+  end
+
+  it 'should have a tag' do
+    photo.save!
+    t = photo.tags.build
+    photo.tags.first.should_not eq(nil)
   end
 
 end

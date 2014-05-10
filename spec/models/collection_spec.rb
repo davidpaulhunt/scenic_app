@@ -1,24 +1,28 @@
 require 'spec_helper'
 
 describe Collection do
+
+  let(:collection) { FactoryGirl.create(:collection) }
   
   it 'should exist' do
-    c = Collection.new
-    c.should_not eq(nil)
+    collection.should_not eq(nil)
   end
 
   it 'should have photos' do
-    c = Collection.new
-    p = c.photos.build
-    c.photos.first.should_not eq(nil)
+    p = collection.photos.build
+    collection.photos.first.should_not eq(nil)
   end
 
   it 'should destroy photos when destroyed' do
-    c = Collection.new
-    c.save
-    p = c.photos.build
-    c.destroy!
-    c.photos.first.should eq(nil)
+    p = collection.photos.build
+    collection.destroy!
+    collection.photos.first.should eq(nil)
+  end
+
+  it 'should have tags' do
+    collection.save!
+    t = collection.tags.build
+    collection.tags.first.should_not eq(nil)
   end
 
 end
