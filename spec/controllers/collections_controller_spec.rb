@@ -5,10 +5,12 @@ describe CollectionsController do
   let(:user) { FactoryGirl.create(:user) }
 
   describe 'GET #new' do
+
     it 'assigns @collection with a new collection' do
       get :new
       assigns(:collection).should_not eq(nil)
     end
+
     it 'renders the new page' do
       get :new
       response.should render_template :new
@@ -28,6 +30,7 @@ describe CollectionsController do
         response.should redirect_to home_path
       end
     end
+  end
 
   describe 'GET #show' do
     it 'assigns @collection' do
@@ -68,11 +71,13 @@ describe CollectionsController do
   end
 
   describe 'GET #edit' do
+
     it 'assigns @collection' do
       login(user)
       get :edit, id: user.collections.first
       assigns(:collection).should_not eq(nil)
     end
+
     it 'should render the edit page' do
       login(user)
       get :edit, id: user.collections.first
