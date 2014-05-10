@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe UsersController do
 
+  let(:user) { FactoryGirl.create(:user) }
+
   describe 'GET #new' do
     it 'assigns @user with a new user' do
       get :new
@@ -58,15 +60,14 @@ describe UsersController do
 
   describe 'GET #home' do
     it 'assigns @user with current_user' do
-      user = FactoryGirl.create(:user)
-      session[:user_id] = user.id
+      login(user)
       get :home
       assigns(:user).should_not eq(nil)
     end
 
     it 'should have collections to display for @user.collections' do
-      user = FactoryGirl.create(:user)
-      session[:user_id] = user.id
+      # session[:user_id] = user.id
+      login(user)
       get :home
       user.collections.count.should eq(3)
     end
@@ -74,14 +75,11 @@ describe UsersController do
 
   describe 'GET #edit' do
     it 'assigns @user' do
-      user = FactoryGirl.create(:user)
       login(user)
-      # debugger
       get :edit, id: user
       assigns(:user).should_not eq(nil)
     end
     it 'should render the edit page' do
-      user = FactoryGirl.create(:user)
       login(user)
       get :edit, id: user
       response.should render_template :edit
