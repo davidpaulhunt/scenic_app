@@ -14,7 +14,6 @@ gem 'jquery-turbolinks'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
-gem 'debugger'
 gem 'faker'
 gem 'rails_12factor'
 
@@ -25,6 +24,7 @@ end
 group :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
+  gem 'debugger'
 end
 
 gem 'bcrypt', '~> 3.1.7'
