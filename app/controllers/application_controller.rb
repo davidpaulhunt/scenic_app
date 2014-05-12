@@ -13,7 +13,8 @@ class ApplicationController < ActionController::Base
   def current_user
     unless params['_method'] == "delete"
       if cookies[:remember_token].present?
-      @current_user ||= User.find_by_remember_token(cookies[:remember_token])
+        @current_user ||= User.find_by_remember_token(cookies[:remember_token])
+      end
     end
   end
 
