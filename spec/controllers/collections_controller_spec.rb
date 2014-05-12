@@ -3,7 +3,7 @@ require 'spec_helper'
 describe CollectionsController do
 
   let(:user) { FactoryGirl.create(:user) }
-  let(:collection) { user.collections.build }
+  let(:collection) { user.collections.first }
 
   describe 'GET #new' do
 
@@ -87,6 +87,35 @@ describe CollectionsController do
       login(user)
       get :edit, id: user.collections.first
       response.should render_template :edit
+    end
+  end
+
+  describe 'PUT #update' do
+    it 'should allow for update' do
+      collection_attributes = FactoryGirl.attributes_for(:collection)
+      collection.save!
+      put :update, id: collection.id, collection: collection.name = 'Update'
+      collection.name.should eq('Update')
+    end
+    it 'should allow for update' do
+      login(user)
+      collection_attrs = FactoryGirl.attributes_for(:update_collection)
+      put :update, id: collection, collection: collection_attrs
+      response.should redirect_to collection_path
+    end
+  end
+
+  describe 'DELETE #destroy' do
+    it 'should destroy the user' do
+      login(user)
+      total = Collection.all.count
+      delete :destroy, id: collection.id
+      Collection.all.count.should < total
+    end
+    it 'should redirect to logout' do
+      login(user)
+      delete :destroy, id: collection.id
+      response.should redirect_to home_path
     end
   end
 

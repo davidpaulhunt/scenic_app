@@ -7,4 +7,8 @@ FactoryGirl.define do
     user
   end
 
+  factory :update_collection, class: Collection, parent: :collection do |f|
+    f.name "Update"
+  end
+
 end

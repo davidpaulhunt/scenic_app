@@ -73,6 +73,14 @@ describe UsersController do
     end
   end
 
+  describe 'GET #show' do
+    it 'assigns @user' do
+      login(user)
+      get :show, id: user
+      assigns(:user).should_not eq(nil)
+    end
+  end
+
   describe 'GET #edit' do
     it 'assigns @user' do
       login(user)
@@ -83,6 +91,32 @@ describe UsersController do
       login(user)
       get :edit, id: user
       response.should render_template :edit
+    end
+  end
+
+  describe 'PUT #update' do
+    it 'should allow for update' do
+      put :update, id: user.id, user: user.email = 'updated@email.com'
+      user.email.should eq('updated@email.com')
+    end
+    it 'should redirect to the home page' do
+      user_attrs = FactoryGirl.attributes_for(:update_user)
+      login(user)
+      put :update, id: user, user: user_attrs
+      response.should redirect_to home_path
+    end
+  end
+
+  describe 'DELETE #destroy' do
+    it 'should destroy the user' do
+      login(user)
+      delete :destroy, id: user
+      User.all.count.should eq(0)
+    end
+    it 'should redirect to logout' do
+      login(user)
+      delete :destroy, id: user
+      response.should redirect_to logout_path
     end
   end
 
