@@ -3,7 +3,8 @@ FactoryGirl.define do
   factory :photo do |f|
     f.photo_upload "photo"
 
-    collection
+    collections {[FactoryGirl.create(:collection)]}
+
   end
 
 end

@@ -21,17 +21,21 @@ describe TagsController do
   #   end
   # end
 
-  describe 'POST #create' do
-    
-    it 'creates a tag' do
-      login(user)
-      tags_attrs = FactoryGirl.attributes_for(:collection)
-      expect{
-        post :create, tag: FactoryGirl.attributes_for(:tag)
-      }.to change(Tag, :count).by(1)
-    end
+  # describe 'POST #create' do
+
+  #   it 'finds to be tagged and assigns it to @taggable' do
+  #     post :create, tag: tag
+  #     assigns(:taggable).should_not eq(nil)
+  #   end
+  #   it 'creates a tag' do
+  #     login(user)
+  #     get show_photo(photo)
+  #     expect{
+  #       post :create, tag: FactoryGirl.attributes_for(:tag)
+  #     }.to change(Tag, :count).by(1)
+  #   end
   
-  end
+  # end
 
   # describe 'GET #show' do
   #   it 'assigns @collection' do
