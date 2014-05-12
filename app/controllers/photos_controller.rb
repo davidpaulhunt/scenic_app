@@ -15,14 +15,14 @@ class PhotosController < ApplicationController
   def destroy
     @photo = Photo.find(params[:id])
     temp = @photo.collections.first.id
-    @photo.destroy
+    @photo.destroy!
     redirect_to collection_path(temp)
   end
 
   private
 
   def photo_params
-    params.require(:photo).permit!
+    params.require(:photo).permit(:photo_upload, :collection_id)
   end
 
 

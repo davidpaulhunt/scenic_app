@@ -59,7 +59,7 @@ class CollectionsController < ApplicationController
   private
 
   def collection_params
-    params.require(:collection).permit!
+    params.require(:collection).permit(:user_id, :name, :description)
   end
 
 end

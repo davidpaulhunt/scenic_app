@@ -36,7 +36,11 @@ class UsersController < ApplicationController
 
   def update
     @user = current_user
-    @user.update(user_params)
+    if @user.update(user_params)
+      redirect_to home_path
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -52,7 +56,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit!
+    params.require(:user).permit(:email, :password, :password_confirmation, :first_name, :last_name, :terms)
   end
 
 end
