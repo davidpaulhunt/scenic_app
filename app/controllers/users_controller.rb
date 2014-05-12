@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 
   def home
     @user = current_user
-    @collection = @user.collections.build
+    @collection = current_user.collections.build
   end
 
   def create
