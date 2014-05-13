@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   skip_filter :ensure_logged_in, only: [:new, :create, :destroy]
-  before_filter :path_boundary, only: [:new, :create, :destroy]
+  before_filter :path_boundary, only: [:new, :create]
   
   def new
   end
