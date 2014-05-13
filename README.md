@@ -1,4 +1,4 @@
-== Scenic
+# Scenic
 
 Scenic is a very simple, cloud-based photo hosting web application. The end state of Scenic is:
 
