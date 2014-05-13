@@ -44,7 +44,8 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    if current_user.destroy!
+    @user = current_user
+    if @user.destroy
       redirect_to logout_path
     end
   end
